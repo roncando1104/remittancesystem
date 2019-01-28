@@ -1,0 +1,52 @@
+Imports System.IO
+Imports System.Data
+Imports System.Reflection
+Imports iTextSharp.text
+Imports iTextSharp.text.pdf  
+
+Private Sub BtnExportPDF_Click(sender As System.Object, e As System.EventArgs) Handles BtnExportPDF.Click
+
+        'Creating iTextSharp Table from the DataTable data
+        Dim pdfTable As New PdfPTable(DgvUsers.ColumnCount)
+        pdfTable.DefaultCell.Padding = 3
+        pdfTable.WidthPercentage = 30
+        pdfTable.HorizontalAlignment = Element.ALIGN_LEFT
+        pdfTable.DefaultCell.BorderWidth = 1
+
+        'Adding Header row
+        For Each column As DataGridViewColumn In DgvUsers.Columns
+            Dim cell As New PdfPCell(New Phrase(column.HeaderText))
+            cell.BackgroundColor = New iTextSharp.text.Color(240, 240, 240)
+            pdfTable.AddCell(cell)
+        Next
+
+        'Adding DataRow
+        For Each row As DataGridViewRow In dataGridView1.Rows
+            For Each cell As DataGridViewCell In row.Cells
+                pdfTable.AddCell(cell.Value.ToString())
+            Next
+        Next
+
+        'Exporting to PDF
+        Dim folderPath As String = "c:\Users\ronal\source\repos\RemittanceSystem\Admin Files\"
+        If Not Directory.Exists(folderPath) Then
+            Directory.CreateDirectory(folderPath)
+        End If
+        Using stream As New FileStream(folderPath & "DataGridViewExport.pdf", FileMode.Create)
+            Dim pdfDoc As New Document(PageSize.A2, 10.0F, 10.0F, 10.0F, 0.0F)
+            PdfWriter.GetInstance(pdfDoc, stream)
+            pdfDoc.Open()
+            pdfDoc.Add(pdfTable)
+            pdfDoc.Close()
+            stream.Close()
+        End Using
+    End Sub
+
+    Public Sub New()
+
+        ' This call is required by the designer.
+        InitializeComponent()
+        Me.DisplayData()
+        ' Add any initialization after the InitializeComponent() call.
+
+    End Sub

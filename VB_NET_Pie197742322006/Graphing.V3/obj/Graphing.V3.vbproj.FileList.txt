@@ -1,0 +1,7 @@
+bin\Graphing.V3.dll
+bin\Graphing.V3.pdb
+bin\Graphing.V3.xml
+obj\Debug\ResolveAssemblyReference.cache
+obj\Debug\Graphing.V3.dll
+obj\Debug\Graphing.V3.xml
+obj\Debug\Graphing.V3.pdb

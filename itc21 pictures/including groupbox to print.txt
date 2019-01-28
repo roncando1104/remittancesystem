@@ -1,0 +1,15 @@
+ ' for group box
+        For Each ctrl As Control In PanelTellerRemitReceipt.Controls
+            If CStr(ctrl.Tag) = page Then
+                If TypeOf ctrl Is GroupBox Then
+                    Dim sf As New System.Drawing.StringFormat
+                    If TypeOf ctrl Is GroupBox Then
+                        If DirectCast(ctrl, GroupBox).Text = HorizontalAlignment.Right Then
+                            sf.Alignment = StringAlignment.Far
+                        Else
+                            sf.Alignment = StringAlignment.Near
+                        End If
+                    End If
+                End If
+            End If
+        Next

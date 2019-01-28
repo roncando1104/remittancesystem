@@ -1,0 +1,8 @@
+ Dim total As Double
+        For i As Integer = 0 To DgvUsers.Rows.Count - 1
+            total = total + DgvUsers.Rows(i).Cells(1).Value
+        Next
+        Dim myrow = dt.NewRow
+        myrow(0) = "TOTAL NO. OF USERS "
+        myrow(1) = total
+        dt.Rows.Add(myrow)

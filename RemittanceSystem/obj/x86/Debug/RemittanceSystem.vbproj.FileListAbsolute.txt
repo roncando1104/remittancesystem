@@ -1,0 +1,4 @@
+C:\Users\ronal\source\repos\RemittanceSystem\RemittanceSystem\obj\x86\Debug\RemittanceSystem.FormLogin.resources
+C:\Users\ronal\source\repos\RemittanceSystem\RemittanceSystem\obj\x86\Debug\RemittanceSystem.Resources.resources
+C:\Users\ronal\source\repos\RemittanceSystem\RemittanceSystem\obj\x86\Debug\RemittanceSystem.vbproj.GenerateResource.Cache
+C:\Users\ronal\source\repos\RemittanceSystem\RemittanceSystem\obj\x86\Debug\RemittanceSystem.vbproj.CoreCompileInputs.cache

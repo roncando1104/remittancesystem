@@ -1,0 +1,15 @@
+  Protected Overrides Sub OnLoad(e As EventArgs)
+
+        Dim path As String = "c:\Users\ronal\source\repos\RemittanceSystem"
+
+        Dim TestNode As New TreeNode("Files")
+        TestNode.Name = path
+        TreeViewAdmin.Nodes.Add(TestNode)
+
+        Dim node() As TreeNode = TreeViewAdmin.Nodes.Find(path, True)
+        If node.Count = 1 Then
+            TreeViewAdmin.SelectedNode = node(0)
+        End If
+
+        MyBase.OnLoad(e)
+    End Sub

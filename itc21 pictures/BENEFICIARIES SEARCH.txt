@@ -1,0 +1,45 @@
+  'search claimant info
+    Public Sub SearchClaimantInfo()
+
+        Dim OraDB As String = "Data Source= (DESCRIPTION =" _
+      + "(ADDRESS=(PROTOCOL=TCP) (HOST=localhost) (PORT=1521))" _
+      + "(CONNECT_DATA=(SERVICE_NAME=ORCL)));" _
+      + "User Id=SYSTEM;Password=SYSTEM;"
+
+        Dim dr As Oracle.DataAccess.Client.OracleDataReader
+        Dim strClaim As String
+        strClaim = "SELECT * FROM REM_BENEFICIARIES WHERE (REFERENCE_NUMBER = '" & TxtClaimRefNo.Text & "')"
+
+        Dim conn As New Oracle.DataAccess.Client.OracleConnection()
+
+        conn.ConnectionString = OraDB
+
+        Dim cmd As Oracle.DataAccess.Client.OracleCommand = New Oracle.DataAccess.Client.OracleCommand(strClaim, conn)
+
+        conn.Open()
+
+        dr = cmd.ExecuteReader
+
+        Try
+
+            While dr.Read
+
+                TxtClaimName.Text = dr("NAME").ToString
+                TxtClaimIDtype.Text = dr("ID_TYPE").ToString
+                TxtClaimMobile.Text = dr("MOBILE_NUMBER").ToString
+                TxtClaimAddress.Text = dr("ADDRESS").ToString
+                TxtClaimRelationship.Text = dr("RELATIONSHIP_TO_THE_SENDER").ToString
+                TxtClaimCorrespondent.Text = dr("CORRESPONDENT").ToString
+                TxtClaimBranch.Text = dr("BRANCH_ADDRESS").ToString
+                TxtClaimAmount.Text = dr("AMOUNT_RECEIVED").ToString
+
+
+            End While
+
+            'TxtClaimAmount.Text = Format(C(TxtDateIssueClaim.Text), "dd-MMM-yyyy")
+
+        Catch ex As Exception
+            MsgBox(ex.ToString)
+        End Try
+
+    End Sub

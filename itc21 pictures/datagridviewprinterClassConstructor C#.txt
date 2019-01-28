@@ -1,0 +1,54 @@
+ Dim MyDataGridViewPrinter As DataGridViewPrinter
+   
+Private Sub BtnPrintAdminStatus_Click(sender As Object, e As EventArgs) Handles BtnPrintAdminStatus.Click
+        If SetupThePrinting() Then
+            PrintDocument1.Print()
+        End If
+    End Sub
+
+    Private Sub PrintDocument1_PrintPage(ByVal sender As System.Object, ByVal e As System.Drawing.Printing.PrintPageEventArgs) Handles PrintDocument1.PrintPage
+        Dim more As Boolean = MyDataGridViewPrinter.DrawDataGridView(e.Graphics)
+
+        If more = True Then
+            e.HasMorePages = True
+        End If
+    End Sub
+
+   
+    Private Sub BtnPrintViewAdminStat_Click(sender As Object, e As EventArgs) Handles BtnPrintViewAdminStat.Click
+        If SetupThePrinting() Then
+            Dim MyPrintPreviewDialog As PrintPreviewDialog = New PrintPreviewDialog()
+            MyPrintPreviewDialog.Document = PrintDocument1
+            MyPrintPreviewDialog.ShowDialog()
+        End If
+    End Sub
+
+    Private Function SetupThePrinting() As Boolean
+
+        Dim MyPrintDialog As PrintDialog = New PrintDialog()
+        MyPrintDialog.AllowCurrentPage = False
+        MyPrintDialog.AllowPrintToFile = False
+        MyPrintDialog.AllowSelection = False
+        MyPrintDialog.AllowSomePages = False
+        MyPrintDialog.ShowHelp = False
+        MyPrintDialog.ShowNetwork = False
+
+        If MyPrintDialog.ShowDialog() <> DialogResult.OK Then
+            Return False
+        End If
+
+        PrintDocument1.DocumentName = "Transaction Status"
+
+        PrintDocument1.PrinterSettings = MyPrintDialog.PrinterSettings
+        PrintDocument1.DefaultPageSettings = MyPrintDialog.PrinterSettings.DefaultPageSettings
+        PrintDocument1.DefaultPageSettings.Margins = New Margins(40, 40, 40, 40)
+
+        If MessageBox.Show("Do you want the report to be centered on the page", "PRINT SETTINGS", MessageBoxButtons.YesNo, MessageBoxIcon.Information) Then
+            MyDataGridViewPrinter = New FormTransaction(DgvStatus, PrintDocument1, True, True, "Status", New Font("Tahoma", 18, FontStyle.Bold))
+        Else
+            MyDataGridViewPrinter = New FormTransaction(DgvStatus, PrintDocument1, False, True, "Status", New Font("Tahoma", 18, FontStyle.Bold))
+        End If
+
+        Return True
+
+    End Function

@@ -1,0 +1,15 @@
+TxtClaimRefNo
+TxtClaimName
+TxtClaimIDtype
+TxtClaimRelationship
+TxtClaimMobile
+TxtClaimAddress
+TxtClaimCorrespondent
+TxtClaimAmount
+TxtClaimBranch
+TxtDateIssueClaim
+TxtClaimExpiryDate
+TxtClaimStatus
+
+197, 634
+113, 0
